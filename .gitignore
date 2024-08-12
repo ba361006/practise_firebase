@@ -1,1 +1,23 @@
+# Node modules
 node_modules/
+
+# Firebase cache and project files
+.firebase/
+.firebaserc
+firebase-debug.log
+
+# Environment variables
+.env
+.env.*
+
+# Build outputs
+dist/
+build/
+
+# MacOS and Linux system files
+.DS_Store
+*.log
+
+# Other
+*.bak
+*.tmp
