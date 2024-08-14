@@ -27,17 +27,23 @@ const TelegramLogin = ()=> {
     script.setAttribute("data-size", "large");
     script.setAttribute("data-onauth", "onTelegramAuth(user)");
     script.setAttribute("data-request-access", "write");
-    document.body.appendChild(script);
+
+    if (telegramLoginRef.current) {
+      console.log("append!");
+      telegramLoginRef.current?.appendChild(script);
+    } else {
+      console.error("Telegram login element not found");
+    }
 
     // Define the onTelegramAuth function
     window.onTelegramAuth = function(user) {
       alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
     };
 
-    // Cleanup script when component unmounts
-    return () => {
-      document.body.removeChild(script);
-    };
+    // // Cleanup script when component unmounts
+    // return () => {
+    //   document.body.removeChild(script);
+    // };
   }, []);
 
   return (
