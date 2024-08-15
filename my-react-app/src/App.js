@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import TelegramLogin from './TelegramLoginWidget.tsx';
+import TelegramLoginSection from './TelegramLoginWidgetSection.tsx';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           Learn React
         </a>
         <TelegramLogin/>
+        <TelegramLoginSection/>
       </header>
     </div>
   );
