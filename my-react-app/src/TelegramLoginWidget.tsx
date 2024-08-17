@@ -22,14 +22,11 @@ const TelegramLogin = ()=> {
     const botUsername = "FoxwowoDevBot";
     const buttonSize = "large";
     const cornerRadius = "20";
-    const widgetVersion = "22";
     const allowBotsendMessageToUser = "write";
 
-
-    // Create the script element for the Telegram widget
     const script = document.createElement('script');
     script.async = true;
-    script.src = `https://telegram.org/js/telegram-widget.js?${widgetVersion}`;
+    script.src = "https://telegram.org/js/telegram-widget.js?22";
     script.setAttribute("data-telegram-login", botUsername);
     script.setAttribute("data-size", buttonSize);
     script.setAttribute("data-radius", cornerRadius);
@@ -42,23 +39,20 @@ const TelegramLogin = ()=> {
       console.error("Telegram login widget element not found");
     }
 
-    // Define the onTelegramAuth function
-    window.onTelegramAuth = function(user) {
-      // id, first_name, last_name, username, photo_url, auth_date and hash fields.
+    const telegramLoginCallback = (user: TelegramUser) => {
+      // after user login telegram, this function will be invoked
       alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
     };
 
-    // Cleanup script when component unmounts
+    window.onTelegramAuth = telegramLoginCallback;
+
     return () => {
       telegramLoginRef.current?.removeChild(script);
     };
   }, []);
 
   return (
-    <div>
-      <h1>Telegram Login</h1>
-      <div id="telegram-login" ref={telegramLoginRef}></div>
-    </div>
+    <div id="telegram-login" ref={telegramLoginRef}></div>
   );
 }
 
